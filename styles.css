@@ -4,8 +4,8 @@
   }
   
   #board td {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     text-align: center;
     border: 1px solid black;
     font-size: 20px;
@@ -46,14 +46,15 @@
     font-weight: bold;
   }
   td {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
   }
   
   .agent {
-    background-image: url(agent.png);
-    width: 30px; /* Ancho de la imagen en píxeles */
-    height: 30px; /* Altura de la imagen en píxeles */
+    background-image: url(imagen/agent.png);
+    background-color: white;
+    width: 70px; /* Ancho de la imagen en píxeles */
+    height: 70px; /* Altura de la imagen en píxeles */
     background-size: contain;
   }
   

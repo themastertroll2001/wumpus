@@ -10,12 +10,12 @@ for (let row = 0; row < boardSize; row++) {
 }
 // Crear el personaje (agente) con imagen
 const agent = document.createElement('img');
-agent.src = 'agent.png'; // Ruta de la imagen del agente
+agent.src = 'imagen/agent.png'; // Ruta de la imagen del agente
 agent.classList.add('agent');
 
 // Colocar elementos en posiciones específicas
-const agentRow = 2;
-const agentCol = 3;
+const agentRow = 0;
+const agentCol = 1;
 board[agentRow][agentCol] = 'A'; // Agente
 
 const wumpusRow = 4;
