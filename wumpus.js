@@ -117,6 +117,10 @@ function getAdjacentCells(row, col) {
 
 // Función para que el agente perciba el entorno
 function perceive(row, col) {
+  const messageElement = document.createElement('div');
+  messageElement.id = 'message';
+  document.body.appendChild(messageElement);
+
   const perceptions = [];
 
   // El agente percibe si en su casilla se encuentra el Wumpus (monstruo)
@@ -129,6 +133,7 @@ function perceive(row, col) {
   for (let cell of adjacentCells) {
     if (board[cell.row][cell.col] === 'W') {
       perceptions.push('El agente percibe hedor.');
+      messageElement.textContent = 'El agente percibe hedor ¡CUIDADO!';
       break;
     }
   }
@@ -137,6 +142,15 @@ function perceive(row, col) {
   for (let cell of adjacentCells) {
     if (board[cell.row][cell.col] === 'P') {
       perceptions.push('El agente percibe viento.');
+      messageElement.textContent = 'El agente percibe viento!!!';
+      break;
+    }
+  }
+
+  for (let cell of adjacentCells) {
+    if (board[cell.row][cell.col] === 'T') {
+      perceptions.push('El agente esta cerca del tesoro!!!');
+      messageElement.textContent = 'El agente esta cerca del tesoro!!!';
       break;
     }
   }
@@ -150,6 +164,7 @@ function perceive(row, col) {
   // El agente percibe si en su casilla hay un pozo o agujero
   if (board[row][col] === 'P') {
     perceptions.push('El agente ha caído en un pozo.');
+    messageElement.textContent = '¡Caíste en el pozo!';
   }
 
   // El agente puede percibir un grito desde su casilla

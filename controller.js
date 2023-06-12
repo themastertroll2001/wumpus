@@ -15,6 +15,7 @@ document.addEventListener('keydown', function(event) {  // Capturar eventos del 
 });
 
 // Función para mover al agente en una dirección dada
+// Función para mover al agente en una dirección dada
 function moveAgent(direccion) {
   // Obtener la posición actual del agente
   let currentRow, currentCol;
@@ -41,7 +42,6 @@ function moveAgent(direccion) {
     newCol++;
   }
 
-
   // Verificar si la nueva posición es válida y actualizar el tablero
   if (newRow !== currentRow || newCol !== currentCol) {
     // Realizar el movimiento actualizando el tablero
@@ -52,8 +52,8 @@ function moveAgent(direccion) {
     // Verificar las percepciones en la nueva posición
     const perceptions = perceive(newRow, newCol);
     console.log(perceptions);
+
+   
   }
 }
-
-// Función para verificar si un movimiento es válido
 
