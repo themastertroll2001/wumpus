@@ -14,9 +14,8 @@ agent.src = 'imagen/agent.png'; // Ruta de la imagen del agente
 agent.classList.add('agent');
 
 // Colocar elementos en posiciones específicas
-const agentRow = 0;
-const agentCol = 1;
-board[agentRow][agentCol] = 'A'; // Agente
+const entryRow = 0;
+const entryCol = 0;
 
 const wumpusRow = 4;
 const wumpusCol = 5;
@@ -30,9 +29,9 @@ const pitRow = 3;
 const pitCol = 1;
 board[pitRow][pitCol] = 'P'; // Pozo
 
-const entryRow = 0;
-const entryCol = 0;
-board[entryRow][entryCol] = 'E'; // Entrada
+const agentRow = entryRow;
+const agentCol = entryCol;
+board[agentRow][agentCol] = 'A'; // Entrada
 
 const exitRow = 7;
 const exitCol = 7;
@@ -67,8 +66,6 @@ function updateBoard() {
         cellElement.classList.add('treasure');
       } else if (board[row][col] === 'P') {
         cellElement.classList.add('pit');
-      } else if (board[row][col] === 'E') {
-        cellElement.classList.add('entry');
       } else if (board[row][col] === 'S') {
         cellElement.classList.add('exit');
       }
