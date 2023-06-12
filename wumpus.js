@@ -17,6 +17,12 @@ pit.classList.add('pit');
 const wumpus = document.createElement('img');
 wumpus.src = 'imagen/wumpus.png'; // Ruta de la imagen del wumpus
 wumpus.classList.add('wumpus');
+const treasure = document.createElement('img');
+treasure.src = 'imagen/tesoro.png'; // Ruta de la imagen del wumpus
+treasure.classList.add('treasure');
+const exit = document.createElement('img');
+exit.src = 'imagen/salida.png'; // Ruta de la imagen del wumpus
+exit.classList.add('exit');
 // Colocar elementos en posiciones específicas
 const entryRow = 0;
 const entryCol = 0;
@@ -69,11 +75,13 @@ function updateBoard() {
         cellElement.appendChild(wumpus); // Colocar la imagen del agente en la celda
       } else if (board[row][col] === 'T') {
         cellElement.classList.add('treasure');
+        cellElement.appendChild(treasure);
       } else if (board[row][col] === 'P') {
         cellElement.classList.add('pit');
         cellElement.appendChild(pit); // Colocar la imagen del agente en la celda
       } else if (board[row][col] === 'S') {
         cellElement.classList.add('exit');
+        cellElement.appendChild(exit);
       }
 
       rowElement.appendChild(cellElement);
