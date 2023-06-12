@@ -1,6 +1,5 @@
 const boardSize = 8;
 const board = [];
-
 // Inicializar el tablero con casillas vacías
 for (let row = 0; row < boardSize; row++) {
   board[row] = [];
@@ -12,7 +11,12 @@ for (let row = 0; row < boardSize; row++) {
 const agent = document.createElement('img');
 agent.src = 'imagen/agent.png'; // Ruta de la imagen del agente
 agent.classList.add('agent');
-
+const pit = document.createElement('img');
+pit.src = 'imagen/pozo.jpg'; // Ruta de la imagen del pozo
+pit.classList.add('pit');
+const wumpus = document.createElement('img');
+wumpus.src = 'imagen/wumpus.png'; // Ruta de la imagen del wumpus
+wumpus.classList.add('wumpus');
 // Colocar elementos en posiciones específicas
 const entryRow = 0;
 const entryCol = 0;
@@ -62,10 +66,12 @@ function updateBoard() {
         cellElement.appendChild(agent); // Colocar la imagen del agente en la celda
       } else if (board[row][col] === 'W') {
         cellElement.classList.add('wumpus');
+        cellElement.appendChild(wumpus); // Colocar la imagen del agente en la celda
       } else if (board[row][col] === 'T') {
         cellElement.classList.add('treasure');
       } else if (board[row][col] === 'P') {
         cellElement.classList.add('pit');
+        cellElement.appendChild(pit); // Colocar la imagen del agente en la celda
       } else if (board[row][col] === 'S') {
         cellElement.classList.add('exit');
       }
@@ -130,6 +136,7 @@ function perceive(row, col) {
   // El agente percibe si en su casilla se encuentra el tesoro
   if (board[row][col] === 'T') {
     perceptions.push('El agente ha encontrado el tesoro.');
+    
   }
 
   // El agente percibe si en su casilla hay un pozo o agujero

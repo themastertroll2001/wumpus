@@ -57,4 +57,18 @@
     height: 70px; /* Altura de la imagen en píxeles */
     background-size: contain;
   }
+  .pit {
+    background-image: url(imagen/agent.png);
+    background-color: white;
+    width: 70px; /* Ancho de la imagen en píxeles */
+    height: 70px; /* Altura de la imagen en píxeles */
+    background-size: contain;
+  }
+  .wumpus {
+    background-image: url(imagen/agent.png);
+    background-color: white;
+    width: 70px; /* Ancho de la imagen en píxeles */
+    height: 70px; /* Altura de la imagen en píxeles */
+    background-size: contain;
+  }
   
