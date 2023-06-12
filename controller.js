@@ -1,4 +1,14 @@
-document.addEventListener('keydown', function(event) {  // Capturar eventos del teclado
+// Función para terminar el juego
+function endGame(message) {
+  // Mostrar mensaje de fin de juego
+  messageElement.textContent = message;
+
+  // Deshabilitar la captura de eventos del teclado
+  document.removeEventListener('keydown', handleKeyPress);
+}
+
+// Función para capturar eventos de teclado
+function handleKeyPress(event) {
   // Obtener la tecla presionada
   const key = event.key.toLowerCase();
 
@@ -12,9 +22,8 @@ document.addEventListener('keydown', function(event) {  // Capturar eventos del 
   } else if (key === 'd') {
     moveAgent('este');
   }
-});
+}
 
-// Función para mover al agente en una dirección dada
 // Función para mover al agente en una dirección dada
 function moveAgent(direccion) {
   // Obtener la posición actual del agente
@@ -53,7 +62,16 @@ function moveAgent(direccion) {
     const perceptions = perceive(newRow, newCol);
     console.log(perceptions);
 
-   
+    // Verificar si el juego debe terminar
+    if (perceptions.includes('El agente ha caído en un pozo.') || perceptions.includes('El agente ha encontrado al Wumpus.')) {
+      endGame('¡Has perdido! El agente ha caído en un pozo o ha encontrado al Wumpus.');
+    } else if (perceptions.includes('El agente ha encontrado el tesoro.')) {
+      endGame('¡Has ganado! El agente ha encontrado el tesoro.');
+    } else if (newRow === exitRow && newCol === exitCol) {
+      endGame('¡Has ganado! El agente ha llegado a la salida.');
+    }
   }
 }
 
+// Agregar el evento de escucha para los eventos de teclado
+document.addEventListener('keydown', handleKeyPress);

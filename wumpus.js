@@ -7,6 +7,11 @@ for (let row = 0; row < boardSize; row++) {
     board[row][col] = '-';
   }
 }
+// Crear el elemento para mostrar mensajes
+const messageElement = document.createElement('div');
+messageElement.id = 'message';
+document.body.appendChild(messageElement);
+
 // Crear el personaje (agente) con imagen
 const agent = document.createElement('img');
 agent.src = 'imagen/agent.png'; // Ruta de la imagen del agente
@@ -117,9 +122,6 @@ function getAdjacentCells(row, col) {
 
 // Función para que el agente perciba el entorno
 function perceive(row, col) {
-  const messageElement = document.createElement('div');
-  messageElement.id = 'message';
-  document.body.appendChild(messageElement);
 
   const perceptions = [];
 
@@ -158,7 +160,7 @@ function perceive(row, col) {
   // El agente percibe si en su casilla se encuentra el tesoro
   if (board[row][col] === 'T') {
     perceptions.push('El agente ha encontrado el tesoro.');
-    
+    alert('¡El agente ha encontrado el tesoro! ¡Ha ganado el juego!');
   }
 
   // El agente percibe si en su casilla hay un pozo o agujero
@@ -178,3 +180,5 @@ function perceive(row, col) {
 // Ejemplo de percepción del agente en la casilla de inicio
 const initialPerceptions = perceive(entryRow, entryCol);
 console.log(initialPerceptions);
+
+
