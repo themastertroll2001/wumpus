@@ -63,15 +63,16 @@ function moveAgent(direccion) {
     console.log(perceptions);
 
     // Verificar si el juego debe terminar
-    if (perceptions.includes('El agente ha caído en un pozo.') || perceptions.includes('El agente ha encontrado al Wumpus.')) {
-      endGame('¡Has perdido! El agente ha caído en un pozo o ha encontrado al Wumpus.');
-    } else if (perceptions.includes('El agente ha encontrado el tesoro.')) {
+    if (newRow === pitRow && newCol === pitCol) {
+      endGame('¡Has perdido! El agente ha caído en un pozo.');
+    } else if (newRow === wumpusRow && newCol === wumpusCol) {
+      endGame('¡Has ganado! El agente ha encontrado al wumpus.');
+    } else if (newRow === treasureRow && newCol === treasureCol) {
       endGame('¡Has ganado! El agente ha encontrado el tesoro.');
     } else if (newRow === exitRow && newCol === exitCol) {
       endGame('¡Has ganado! El agente ha llegado a la salida.');
     }
   }
 }
-
 // Agregar el evento de escucha para los eventos de teclado
 document.addEventListener('keydown', handleKeyPress);
