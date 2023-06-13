@@ -2,11 +2,38 @@
 function endGame(message) {
   // Mostrar mensaje de fin de juego
   messageElement.textContent = message;
-
   // Deshabilitar la captura de eventos del teclado
   document.removeEventListener('keydown', handleKeyPress);
+  const restart = resetGame();
 }
+function resetGame() {
+  // Restablecer el tablero con casillas vacías
+  for (let row = 0; row < boardSize; row++) {
+    for (let col = 0; col < boardSize; col++) {
+      board[row][col] = '-';
+    }
+  }
 
+  // Colocar los objetos iniciales en el tablero
+  board[wumpusRow][wumpusCol] = 'W'; // Wumpus
+  board[treasureRow][treasureCol] = 'T'; // Tesoro
+  board[pitRow][pitCol] = 'P'; // Pozo
+  board[agentRow][agentCol] = 'A'; // Entrada
+  board[exitRow][exitCol] = 'S'; // Salida
+
+  // Mostrar el tablero inicial
+  updateBoard();
+
+  // Posicionar el agente en el tablero
+  const agentCell = document.getElementById(`cell-${agentRow}-${agentCol}`);
+  agentCell.appendChild(agent);
+
+  // Reiniciar el mensaje
+  messageElement.textContent = '';
+
+  // Volver a habilitar la captura de eventos del teclado
+  document.addEventListener('keydown', handleKeyPress);
+}
 // Función para capturar eventos de teclado
 function handleKeyPress(event) {
   // Obtener la tecla presionada
@@ -64,12 +91,16 @@ function moveAgent(direccion) {
 
     // Verificar si el juego debe terminar
     if (newRow === pitRow && newCol === pitCol) {
+      alert('¡Has perdido! El agente ha caído en un pozo.');
       endGame('¡Has perdido! El agente ha caído en un pozo.');
     } else if (newRow === wumpusRow && newCol === wumpusCol) {
-      endGame('¡Has ganado! El agente ha encontrado al wumpus.');
+      alert('¡Has perdido! El agente ha encontrado a cristiancomegalletas.');
+      endGame('¡Has perdido! El agente ha encontrado al wumpus.');
     } else if (newRow === treasureRow && newCol === treasureCol) {
-      endGame('¡Has ganado! El agente ha encontrado el tesoro.');
+      alert('¡Has ganado! El agente ha encontrado el tesoro.');
+      endGame('¡Has ganado! El agente ha encontrado el tesoro.'); 
     } else if (newRow === exitRow && newCol === exitCol) {
+      alert('¡Has ganado! El agente ha llegado a la salida.');
       endGame('¡Has ganado! El agente ha llegado a la salida.');
     }
   }
