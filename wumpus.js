@@ -1,5 +1,6 @@
 const boardSize = 8;
 const board = [];
+
 // Inicializar el tablero con casillas vacías
 for (let row = 0; row < boardSize; row++) {
   board[row] = [];
@@ -7,6 +8,7 @@ for (let row = 0; row < boardSize; row++) {
     board[row][col] = '-';
   }
 }
+
 // Crear el elemento para mostrar mensajes
 const messageElement = document.createElement('div');
 messageElement.id = 'message';
@@ -16,18 +18,7 @@ document.body.appendChild(messageElement);
 const agent = document.createElement('img');
 agent.src = 'imagen/agent.png'; // Ruta de la imagen del agente
 agent.classList.add('agent');
-const pit = document.createElement('img');
-pit.src = 'imagen/pozo.jpg'; // Ruta de la imagen del pozo
-pit.classList.add('pit');
-const wumpus = document.createElement('img');
-wumpus.src = 'imagen/wumpus.png'; // Ruta de la imagen del wumpus
-wumpus.classList.add('wumpus');
-const treasure = document.createElement('img');
-treasure.src = 'imagen/tesoro.png'; // Ruta de la imagen del wumpus
-treasure.classList.add('treasure');
-const exit = document.createElement('img');
-exit.src = 'imagen/salida.png'; // Ruta de la imagen del wumpus
-exit.classList.add('exit');
+
 // Colocar elementos en posiciones específicas
 const entryRow = 0;
 const entryCol = 0;
@@ -55,6 +46,7 @@ board[exitRow][exitCol] = 'S'; // Salida
 // Mostrar el tablero inicial
 updateBoard();
 
+
 // Posicionar el agente en el tablero
 const agentCell = document.getElementById(`cell-${agentRow}-${agentCol}`);
 agentCell.appendChild(agent);
@@ -75,18 +67,43 @@ function updateBoard() {
       if (board[row][col] === 'A') {
         cellElement.classList.add('agent');
         cellElement.appendChild(agent); // Colocar la imagen del agente en la celda
-      } else if (board[row][col] === 'W') {
+      } else if (board[row][col] === 'W' && (row === agentRow + 1 || row === agentRow - 1 || col === agentCol + 1 || col === agentCol - 1)) {
         cellElement.classList.add('wumpus');
-        cellElement.appendChild(wumpus); // Colocar la imagen del agente en la celda
-      } else if (board[row][col] === 'T') {
-        cellElement.classList.add('treasure');
-        cellElement.appendChild(treasure);
-      } else if (board[row][col] === 'P') {
-        cellElement.classList.add('pit');
-        cellElement.appendChild(pit); // Colocar la imagen del agente en la celda
-      } else if (board[row][col] === 'S') {
+        if (row === wumpusRow && col === wumpusCol && !(row === agentRow && col === agentCol)) {
+          const wumpusImg = document.createElement('img');
+          wumpusImg.src = 'imagen/wumpus.png'; // Ruta de la imagen del wumpus
+          wumpusImg.classList.add('wumpus');
+          cellElement.appendChild(wumpusImg); // Mostrar el Wumpus en la celda
+        }
+      } else if (board[row][col] === 'P' && !(row === agentRow && col === agentCol) && (row === agentRow + 1 || row === agentRow - 1 || col === agentCol + 1 || col === agentCol - 1)) {
+        let showPit = false;
+
+        // Verificar si el agente se encuentra en una celda adyacente al pozo
+        if (row === agentRow + 1 && col === agentCol) {
+          showPit = true;
+        } else if (row === agentRow - 1 && col === agentCol) {
+          showPit = true;
+        } else if (row === agentRow && col === agentCol + 1) {
+          showPit = true;
+        } else if (row === agentRow && col === agentCol - 1) {
+          showPit = true;
+        }
+
+        if (showPit) {
+          cellElement.classList.add('pit');
+          const pitImg = document.createElement('img');
+          pitImg.src = 'imagen/pozo.jpg'; // Ruta de la imagen del pozo
+          pitImg.classList.add('pit');
+          cellElement.appendChild(pitImg); // Mostrar el pozo en la celda
+        }
+      } else if (board[row][col] === 'S' && (row === agentRow + 1 || row === agentRow - 1 || col === agentCol + 1 || col === agentCol - 1)) {
         cellElement.classList.add('exit');
-        cellElement.appendChild(exit);
+        if (row === exitRow && col === exitCol && !(row === agentRow && col === agentCol)) {
+          const exitImg = document.createElement('img');
+          exitImg.src = 'imagen/salida.png'; // Ruta de la imagen de la salida
+          exitImg.classList.add('exit');
+          cellElement.appendChild(exitImg); // Mostrar la salida en la celda
+        }
       }
 
       rowElement.appendChild(cellElement);
@@ -122,7 +139,6 @@ function getAdjacentCells(row, col) {
 
 // Función para que el agente perciba el entorno
 function perceive(row, col) {
-
   const perceptions = [];
 
   // El agente percibe si en su casilla se encuentra el Wumpus (monstruo)
@@ -180,5 +196,3 @@ function perceive(row, col) {
 // Ejemplo de percepción del agente en la casilla de inicio
 const initialPerceptions = perceive(entryRow, entryCol);
 console.log(initialPerceptions);
-
-
