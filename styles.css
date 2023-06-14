@@ -14,9 +14,11 @@
     background-color: #ffcc00;
     color: black;
     font-weight: bold;
+    z-index: -1;
   }
   
   #board .wumpus {
+  
     background-color: #cc0000;
     color: white;
     font-weight: bold;
@@ -26,6 +28,7 @@
     background-color: #ffff00;
     color: black;
     font-weight: bold;
+    z-index: 3;
   }
   
   #board .pit {
@@ -50,11 +53,12 @@
   }
   
   .agent {
-   
+  
     background-color: white;
     width: 70px; /* Ancho de la imagen en píxeles */
     height: 70px; /* Altura de la imagen en píxeles */
     background-size: contain;
+   z-index: 1;
   }
   .pit {
     
@@ -76,6 +80,7 @@
     width: 70px; /* Ancho de la imagen en píxeles */
     height: 70px; /* Altura de la imagen en píxeles */
     background-size: contain;
+    z-index: 3;
   }
   .exit {
    

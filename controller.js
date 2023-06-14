@@ -59,6 +59,7 @@ function moveAgent(direccion) {
     console.log(perceptions);
     // Verificar si el juego debe terminar
     if (newRow === pitRow && newCol === pitCol) {
+      
       const pitImg = document.createElement('img');
       pitImg.src = 'imagen/pozo.jpg'; //  ruta de la imagen del pozo
       pitImg.classList.add('pit');
@@ -69,14 +70,35 @@ function moveAgent(direccion) {
         resetGame();
       }, 0);
     } else if (newRow === wumpusRow && newCol === wumpusCol) {
+      const wumpusImg = document.createElement('img');
+      wumpusImg.src = 'imagen/wumpus.png'; //  ruta de la imagen del pozo
+      wumpusImg.classList.add('wumpus');
+      const cellElement = document.getElementById(`cell-${newRow}-${newCol}`);
+      cellElement.appendChild(wumpusImg);
+      setTimeout(function() {
       showMessage('¡Has perdido! El agente ha encontrado al Wumpus.');
       resetGame();
+    }, 0);
     } else if (newRow === treasureRow && newCol === treasureCol) {
+      const treasureImg = document.createElement('img');
+      treasureImg.src = 'imagen/tesoro.png'; //  ruta de la imagen del pozo
+      treasureImg.classList.add('treasure');
+      const cellElement = document.getElementById(`cell-${newRow}-${newCol}`);
+      cellElement.appendChild(treasureImg);
+      setTimeout(function() {
       showMessage('¡Has ganado! El agente ha encontrado el tesoro.');
       resetGame();
+    }, 0);
     } else if (newRow === exitRow && newCol === exitCol) {
+      const exitImg = document.createElement('img');
+      exitImg.src = 'imagen/salida.png'; //  ruta de la imagen del pozo
+      exitImg.classList.add('exit');
+      const cellElement = document.getElementById(`cell-${newRow}-${newCol}`);
+      cellElement.appendChild(exitImg);
+      setTimeout(function() {
       showMessage('¡Has ganado! El agente ha llegado a la salida.');
       resetGame();
+    }, 0);
     }
   }
 }
