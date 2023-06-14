@@ -57,11 +57,11 @@
     background-size: contain;
   }
   .pit {
-   
+    
     background-color: white;
-    width: 70px; /* Ancho de la imagen en píxeles */
-    height: 70px; /* Altura de la imagen en píxeles */
-    background-size: contain;
+    width: 30px; /* Ancho de la imagen en píxeles */
+    height: 30px; /* Altura de la imagen en píxeles */
+   
   }
   .wumpus {
     
